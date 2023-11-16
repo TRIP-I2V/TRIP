@@ -335,7 +335,9 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Recent advances in text-to-video generation have demonstrated the utility of powerful diffusion models. Nevertheless, the problem is not trivial when shaping diffusion models to animate static image (i.e., image-to-video generation). The difficulty originates from the aspect that the diffusion process of subsequent animated frames should not only preserve the faithful alignment with the given image but also pursue temporal coherence among adjacent frames. To alleviate this, we present TRIP, a new recipe of image-to-video diffusion paradigm that pivots on image noise prior derived from static image to jointly trigger inter-frame relational reasoning and ease the coherent temporal modeling via temporal residual learning. Technically, the image noise prior is first attained through one-step backward diffusion process based on both static image and noised video latent codes. Next, TRIP executes a residual-like dual-path scheme for noise prediction: 1) a shortcut path that directly takes image noise prior as the reference noise of each frame to amplify the alignment between the first frame and subsequent frames; 2) a residual path that employs 3D-UNet over noised video and static image latent codes to enable inter-frame relational reasoning, thereby easing the learning of the residual noise for each frame. Furthermore, both reference and residual noise of each frame are dynamically merged via attention mechanism for final video generation. Extensive experiments on WebVid-10M, DTDB and MSR-VTT datasets demonstrate the effectiveness of our TRIP for image-to-video generation.
+            Recent advances in text-to-video generation have demonstrated the utility of powerful diffusion models. Nevertheless, the problem is not trivial when shaping diffusion models to animate static image (i.e., image-to-video generation). The difficulty originates from the aspect that the diffusion process of subsequent animated frames should not only preserve the faithful alignment with the given image but also pursue temporal coherence among adjacent frames. To alleviate this, we present TRIP, a new recipe of image-to-video diffusion paradigm that pivots on image noise prior derived from static image to jointly trigger inter-frame relational reasoning and ease the coherent temporal modeling via temporal residual learning.
+Technically, the image noise prior is first attained through one-step backward diffusion process based on both static image and noised video latent codes. Next, TRIP executes a residual-like dual-path scheme for noise prediction: 1) a shortcut path that directly takes image noise prior as the reference noise of each frame to amplify the alignment between the first frame and subsequent frames; 2) a residual path that employs 3D-UNet over noised video and static image latent codes to enable inter-frame relational reasoning, thereby easing the learning of the residual noise for each frame. Furthermore, both reference and residual noise of each frame are dynamically merged via attention mechanism for final video generation.
+Extensive experiments on WebVid-10M, DTDB and MSR-VTT datasets demonstrate the effectiveness of our TRIP for image-to-video generation.
           </p>
         </div>
       </div>
@@ -355,12 +357,12 @@
           <img src="static/images/TRIP.png" />
         </div>
         <p class="content has-text-justified">
-          An overview of our Temporal Residual learning with Image noise Prior (TRIP), and the conceptual comparison between typical frame-wise denoising and our temporal noise fusion. During model training, the input video clip is encoded into a sequence of image latent codes via a pre-trained 2D VAE. The latent code of first frame is then concatenated with noised video latent code as the input of the 3D-UNet.
-	Then, TRIP performs a residual-like noise prediction in two paths, i.e., shortcut path and residual path.
+          An overview of (a) our Temporal Residual learning with Image noise Prior (TRIP), and (b) the conceptual comparison between typical frame-wise denoising and our temporal noise fusion. During training, the input video clip is encoded into a sequence of image latent codes via a pre-trained 2D VAE. The latent code of first frame is then concatenated with noised video latent code as the input of the 3D-UNet.
+	Then, TRIP performs a residual-like noise prediction along two pathways, i.e., shortcut path and residual path.
 	The shortcut path computes the image noise prior as the reference noise based on the first frame latent codes and the noised video latent codes through a one-step backward diffusion. 
 	The residual path leverages 3D-UNet to predict the residual noise with reference to the image noise prior. 
-    By dynamically merging the reference and residual noise via a transformer-based temporal noise fusion (TNF) module, the target noise vector for video denoising is attained. The 3D-UNet and TNF module is jointly optimized with the MSE loss for noise estimation.
-        </p>
+    By dynamically merging the reference and residual noise via a Transformer-based Temporal Noise Fusion (TNF) module, the target noise vector for video denoising is attained. Both 3D-UNet and TNF module are jointly optimized with the typical MSE loss for I2V generation.
+          </p>
       </div>
     </div>
   </div>
@@ -431,7 +433,7 @@
 <section class="section hero">
   <div class="hero-body">
     <div class="container">
-      <h2 class="title is-3">Personalized Image Animation Combined with 2D Diffusion Model</h2>
+      <h2 class="title is-3">Customized Image Animation Combined with 2D Diffusion Model</h2>
       <div class="marquee-item">
         <video onloadstart="this.playbackRate = 0.75;" poster="" id="video1" class="lozad" autoplay muted loop playsinline height="100%">
           <source src="static/videos/SDXL-concate_edit_video/3_a_castle_in_the_middle_of_a_forest_with_a_river_running_through_it.mp4"
